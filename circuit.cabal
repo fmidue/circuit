@@ -1,0 +1,28 @@
+name:                circuit
+version:             0.1.0.0
+synopsis:            Naive Circuit Simulation
+-- description:
+homepage:            https://gitlab.imn.htwk-leipzig.de/waldmann/circuit
+license:             GPL-3
+license-file:        LICENSE
+author:              Johannes Waldmann
+maintainer:          johannes.waldmann@htwk-leipzig.de
+-- copyright:
+category:            Math
+build-type:          Simple
+extra-source-files:  CHANGELOG.md, README.md
+cabal-version:       >=1.10
+
+library
+  exposed-modules:     Circuit, Circuit.Simulate, Circuit.Data, Circuit.Vector, Circuit.Unit, Circuit.Function
+  -- other-modules:
+  -- other-extensions:
+  build-depends:       base, containers, gnuplot, hmatrix
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+		       
+test-suite render-bp
+  hs-source-dirs: test
+  type: exitcode-stdio-1.0
+  main-is: BP.hs
+  build-depends: base, circuit, gnuplot

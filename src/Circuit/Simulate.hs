@@ -11,6 +11,7 @@ import qualified Data.Set as S
 import Control.Monad (guard, mzero)
 import Data.List (mapAccumL)
 
+import Data.Monoid ((<>))
 
 apply :: Circuit -> Time -> [ Voltage ] -> [ Voltage ]
 apply c delta inputs =

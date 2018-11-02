@@ -1,6 +1,6 @@
 -- | circuits and components
 
-{-# language GeneralizedNewtypeDeriving #-}
+{-# language GeneralizedNewtypeDeriving, DeriveGeneric #-}
 
 module Circuit.Data where
 
@@ -8,20 +8,19 @@ import Circuit.Unit
 
 import qualified Data.Map.Strict as M
 
-
 import Graphics.Gnuplot.Simple (plotList, plotLists)
 
+import GHC.Generics
 
 
-
-newtype Node = Node Int deriving (Eq, Ord, Show, Read, Enum, Num)
-newtype Edge = Edge Int deriving (Eq, Ord, Show, Read, Enum, Num)
+newtype Node = Node Int deriving (Eq, Ord, Show, Read, Enum, Num, Generic)
+newtype Edge = Edge Int deriving (Eq, Ord, Show, Read, Enum, Num, Generic)
 
 data Circuit = Circuit
   { ground :: Node
   , output :: Node
   , components :: M.Map Edge (Node, Component, Node)
-  } deriving Show
+  } deriving (Show, Generic)
 
 data Component
   = Resistor Resistance
@@ -31,14 +30,7 @@ data Component
   | Voltage_Source Voltage
   | Voltage_Source_Input
   | Opamp { pos :: Node, neg :: Node }
-  deriving Show
-
-
-
-
-
--- * examples/test cases for external API
-
+  deriving (Show, Generic)
 
 
 -- * example circuits

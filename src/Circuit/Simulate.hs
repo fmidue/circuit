@@ -22,9 +22,6 @@ apply_func c delta f =
   let ts = [0, delta .. ]
   in  zip ts $ apply c delta $ map f ts
 
-opamp_gain = 1e3 :: Double
-
-
 data State = State
   { voltage :: M.Map Node Voltage
   , current :: M.Map Edge Current
@@ -102,8 +99,7 @@ kirchhoff_equations c inp =
           Voltage_Source_Input ->
             equals [ (V p, 1), (V q, -1)] [ ( Unit, realToFrac inp) ]
           Opamp {} -> 
-            equals [ (V p, 1), (V q, -1)] 
-                   [ (V $ pos comp, opamp_gain), (V $ neg comp , negate opamp_gain) ]
+            equals [ ] [ (V $ pos comp, 1), (V $ neg comp , -1) ]
       for_nodes = map Zero $ M.elems $ M.fromListWith plus $ do
         (e, (p, _, q)) <- edges c
         [ (p, singleton (C e) 1) , (q, singleton (C e) (-1)) ]

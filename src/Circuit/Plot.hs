@@ -6,6 +6,7 @@ import Circuit.Function
 import Circuit.Simulate
 
 import Graphics.Gnuplot.Simple
+import Data.Monoid
 
 plot = plot_with []
 plot_png f = plot_with [ PNG f ]
